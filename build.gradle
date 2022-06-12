@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.0'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.wing'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'junit:junit:4.13.2'
+	implementation 'org.slf4j:slf4j-api:1.7.36'
+    compileOnly 'org.projectlombok:lombok'
+	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
+	compileOnly group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.29'
+	annotationProcessor 'org.projectlombok:lombok'
+	runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'javax.servlet:javax.servlet-api:4.0.1'
+	testImplementation 'org.springframework:spring-webmvc'
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
