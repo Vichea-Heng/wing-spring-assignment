@@ -22,20 +22,21 @@ public class ProductService {
     }
 
     public ProductEntity updateProduct(Integer id, ProductUpdateDTO dto){
-        ProductEntity productEntity = productRepository.findById(id).orElse(null);
+        ProductEntity oldProductEntity = productRepository.findById(id).orElseThrow();
 
-        if(productEntity == null) return null;
-
-        ProductEntity newProductEntity = dto.toNewProductEntity(productEntity);
+        ProductEntity newProductEntity = dto.toNewProductEntity(oldProductEntity);
 
         return productRepository.saveAndFlush(newProductEntity);
     }
 
     public void reduceQuantity(ProductEntity productEntity, Integer Quantity) throws Exception {
         if(productEntity.getQuantity() < Quantity){
-            throw new Exception("Quantity cannot be less than 0");
+            throw new Exception("Not enough items in stock.");
         }
-        productEntity.setQuantity(productEntity.getQuantity() - Quantity);
+
+        Integer newQuantity = productEntity.getQuantity() - Quantity;
+
+        productEntity.setQuantity(newQuantity);
 
         productRepository.save(productEntity);
     }

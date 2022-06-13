@@ -19,12 +19,4 @@ public class UserService {
         UserEntity userEntity = dto.toUserEntity();
         return userRepository.save(userEntity);
     }
-
-    public List<UserEntity> getUsers() {
-        return userRepository.findAll();
-    }
-
-    public UserEntity getUser(Integer id){
-        return userRepository.findById(id).orElseThrow();
-    }
 }

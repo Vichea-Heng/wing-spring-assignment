@@ -6,6 +6,7 @@ import com.wing.ecommerce.dao.UserRepository;
 import com.wing.ecommerce.dto.CheckoutDTO;
 import com.wing.ecommerce.entity.CheckoutEntity;
 import com.wing.ecommerce.entity.ProductEntity;
+import com.wing.ecommerce.entity.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -36,7 +37,9 @@ public class CheckoutService {
     }
     @Transactional(rollbackOn = Exception.class)
     public List<CheckoutEntity> checkoutProduct(CheckoutDTO checkoutDTO) throws Exception {
-        checkoutDTO.setUserEntity(userRepository.findById(checkoutDTO.getUserId()).orElseThrow());
+        UserEntity userEntity = userRepository.findById(checkoutDTO.getUserId()).orElseThrow();
+        checkoutDTO.setUserEntity(userEntity);
+
         List<CheckoutEntity> list = new ArrayList<>();
 
         for (Map<String, String> product: checkoutDTO.getProducts()) {

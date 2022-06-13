@@ -24,7 +24,9 @@ public class CheckoutEntity {
     @JoinColumn(name = "product_id")
     @JsonIdentityReference
     private ProductEntity productEntity;
+    @Column(nullable = false)
     private Integer quantity;
+    @Column(nullable = false)
     private LocalDateTime createdDatetime;
 
     public CheckoutEntity(){}

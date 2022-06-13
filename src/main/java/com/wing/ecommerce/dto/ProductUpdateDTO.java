@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wing.ecommerce.entity.ProductEntity;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ public class ProductUpdateDTO {
     @NotEmpty
     private String productCode;
     @NotEmpty
+    @Min(0)
     private Integer quantity;
     @NotEmpty
     private Integer updatedBy; // store as an id, easy for getting the accurate name of that user
